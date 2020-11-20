@@ -1,5 +1,5 @@
 <launch>
-  <arg name="base_link" value="base_link"/>
+  <arg name="base_link" value="A1/base_link"/>
   <arg name="camera" value="pico_flexx_optical_frame"/>
 
   <node pkg="tf2_ros" type="static_transform_publisher" name="stereo_to_base_broadcaster" args="0.121 0.035 -0.058 -0.573 0.581 -0.414 0.403 $(arg base_link) stereo_link" />
@@ -9,7 +9,8 @@
 
   <node name="cloudTransformer" pkg="hfsd" type="cloudTransformer" output="screen">
      <param name="base_frame" value="$(arg base_link)" />
-     <remap from="/cloudTransformer/inputcloud" to="/pico_flexx/points_reduced"/>
+     <!-- <remap from="/cloudTransformer/inputcloud" to="/pico_flexx/points_reduced"/> -->
+     <remap from="/cloudTransformer/inputcloud" to="/A1/rgbd_camera/depth/points"/>
   </node>
   <node name="hfsd" pkg="hfsd" type="hfsd_node" output="screen">
      <param name="markerSkip" value="15" type="int"/>
@@ -58,6 +59,7 @@
      <param name="showDebugMessages" value="false" type="bool"/>
 
      <remap from="/hfsd/points_input" to="/cloudTransformer/points"/>     
-     <remap from="/hfsd/odometry_input" to="/rovio/odometry"/>
+     <!-- <remap from="/hfsd/odometry_input" to="/rovio/odometry"/> -->
+      <remap from="/hfsd/odometry_input" to="/A1/odom"/>
   </node>
 </launch>

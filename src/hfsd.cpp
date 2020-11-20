@@ -227,7 +227,7 @@ void pubHandler::messageReceivedPose(const nav_msgs::Odometry::ConstPtr & msg){
 			tf2::fromMsg(msg->pose.pose.orientation, _initQ);
 		}
 		_loops++;
-		if(_timing)ROS_INFO_STREAM("CURRENT LOOP: "<<_loops);
+		// if(_timing)ROS_INFO_STREAM("CURRENT LOOP: "<<_loops);
 		if(_debug)ROS_INFO("Receiving Odometry...");
 		std::chrono::high_resolution_clock::time_point t_start2 = std::chrono::high_resolution_clock::now();
 
